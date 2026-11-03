@@ -1,0 +1,111 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "almarel",
+    "nameCn": "alma-relay",
+    "repoName": "alma-relay-deploy-guide",
+    "oneLiner": "不用端口映射，也不依赖第三方中继：自己的服务器就是手机与桌面之间的桥",
+    "officialRepo": "https://github.com/yetone/alma-relay",
+    "officialDocs": "https://github.com/yetone/alma-relay#deploy",
+    "stars": "416",
+    "license": "MIT",
+    "highlights": [
+      "自托管中继，不经过第三方",
+      "Docker Compose 带 Caddy 自动证书",
+      "支持 WebSocket 与 TURN",
+      "也可部署到 Cloudflare Workers",
+      "令牌按用户签发",
+      "MIT，可自用可二开"
+    ],
+    "mcpSupport": "项目本身不含 MCP；本仓库的 MCP 只提供部署步骤、端口与常见问题。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-11-03",
+    "verification": [
+      [
+        "README 确认 Docker/Cloudflare/自建反代三种方式与 8787 端口",
+        "已核对 2026-11-03"
+      ],
+      [
+        "确认 RELAY_DOMAIN、令牌签发与 TURN profile",
+        "已核对 2026-11-03"
+      ],
+      [
+        "未实测部署与配对",
+        "说明 2026-11-03"
+      ],
+      [
+        "MCP 冒烟：initialize / tools/list 返回 get_guide、search_guide、get_project_info",
+        "已验证 2026-11-03"
+      ],
+      [
+        "非目标宿主调用 get_guide 被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-11-03"
+      ]
+    ],
+    "deploy": {
+      "type": "docker",
+      "steps": [
+        "git clone https://github.com/yetone/alma-relay.git",
+        "cd alma-relay",
+        "cp .env.example .env",
+        "echo \"把 .env 里的 RELAY_DOMAIN 改成你的域名，并把域名解析到这台服务器\"",
+        "docker compose up -d"
+      ],
+      "stepsPs": [
+        "git clone https://github.com/yetone/alma-relay.git",
+        "Set-Location alma-relay",
+        "Copy-Item .env.example .env",
+        "Write-Host \"把 .env 里的 RELAY_DOMAIN 改成你的域名，并把域名解析到这台服务器\"",
+        "docker compose up -d"
+      ],
+      "source": "https://github.com/yetone/alma-relay#deploy"
+    },
+    "pitfalls": [
+      "证书失败：确认域名解析与 80/443 可达",
+      "连不上：检查反代是否放行 WebSocket 并关闭缓冲",
+      "TURN 不生效：用 `--profile turn` 单独起",
+      "令牌无效：用 `mint-token` 重新签发",
+      "手机端配对失败：确认中继地址是 HTTPS 域名",
+      "响应被缓冲：Nginx 加 `proxy_buffering off`",
+      "CF Workers 部署失败：检查 wrangler 登录与 Durable Objects 权限"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/alma-relay-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/alma-relay-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "alma-relay",
+    "alma-relay 部署",
+    "自托管 中继",
+    "远程控制 桌面",
+    "手机 控制 电脑",
+    "WebSocket 中继",
+    "TURN 服务器",
+    "alma relay 教程",
+    "Cloudflare Workers 中继",
+    "alma-relay deploy guide"
+  ],
+  "topics": [
+    "self-hosted",
+    "remote-access",
+    "relay",
+    "docker",
+    "websocket",
+    "alma-relay"
+  ]
+}
